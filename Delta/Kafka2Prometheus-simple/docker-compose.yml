@@ -1,0 +1,34 @@
+version: '2'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "testtopic:1:1"
+  kafka-exporter:
+    image: bitnami/kafka-exporter
+    container_name: kafka_exporter
+    hostname: kafka_exporter
+    depends_on:
+      - kafka
+#    command:
+#      - --kafka.server=kafka:9092
+  prometheus:
+    image: prom/prometheus
+    hostname: prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus

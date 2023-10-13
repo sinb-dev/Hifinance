@@ -1,0 +1,13 @@
+version: '2'
+services:
+  prometheus:
+    image: prom/prometheus
+    hostname: prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+  grafana:
+    image: grafana/grafana-oss
+    hostname: grafana
+    ports:
+      - "3000:3000"
