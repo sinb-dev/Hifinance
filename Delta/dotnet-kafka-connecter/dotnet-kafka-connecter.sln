@@ -1,25 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.5.002.0
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dotnet-kafka-connecter", "dotnet-kafka-connecter.csproj", "{414FE309-0378-479C-80DE-5B2AFD1320DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dkc.lib", "dkc.lib\dkc.lib.csproj", "{51E52BD9-1E23-43F5-9880-D7502BCBCC1A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dkc.producer", "dkc.producer\dkc.producer.csproj", "{E3A16666-E7BF-4994-A17F-9BC110B038DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dkc.consumer", "dkc.consumer\dkc.consumer.csproj", "{B0D04342-1E8D-48CD-9E5B-6DE8113F92E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{414FE309-0378-479C-80DE-5B2AFD1320DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{414FE309-0378-479C-80DE-5B2AFD1320DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{414FE309-0378-479C-80DE-5B2AFD1320DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{414FE309-0378-479C-80DE-5B2AFD1320DB}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5728E86C-BFBC-4BA4-A5F1-A750B01C7B18}
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51E52BD9-1E23-43F5-9880-D7502BCBCC1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51E52BD9-1E23-43F5-9880-D7502BCBCC1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51E52BD9-1E23-43F5-9880-D7502BCBCC1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51E52BD9-1E23-43F5-9880-D7502BCBCC1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3A16666-E7BF-4994-A17F-9BC110B038DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3A16666-E7BF-4994-A17F-9BC110B038DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3A16666-E7BF-4994-A17F-9BC110B038DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3A16666-E7BF-4994-A17F-9BC110B038DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0D04342-1E8D-48CD-9E5B-6DE8113F92E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0D04342-1E8D-48CD-9E5B-6DE8113F92E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0D04342-1E8D-48CD-9E5B-6DE8113F92E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0D04342-1E8D-48CD-9E5B-6DE8113F92E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
