@@ -1,0 +1,17 @@
+version: "2"
+services:
+  prometheus:
+    image: prom/prometheus
+    hostname: prometheus
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+  node_exporter:
+    image: linuxkit/node_exporter:9b46e0f911c91865bfd2237f37ba56cf3e8830ab-amd64
+    volumes:
+      - /proc:/host/proc
+      - /sys:/host/sys
+    ports:
+      - "9100:9100"
