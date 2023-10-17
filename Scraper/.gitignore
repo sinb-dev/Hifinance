@@ -1,0 +1,5 @@
+bin
+.vscode
+cache
+obj
+scraper.db
