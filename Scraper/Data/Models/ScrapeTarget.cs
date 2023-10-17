@@ -4,14 +4,14 @@ namespace Scraper.Data.Models;
 public class ScrapeTarget : Model
 {
     [Field(Name = "target_id", AutoIncrement = true)]
-    public int TargetId { get; set;} = 0;
-    [Field(Name = "website")]
-    public Uri Url {get;set;} = new Uri("");
+    public long TargetId { get; set;} = 0;
+    [Field(Name = "url")]
+    public Uri? Url {get;set;}
     [Field(Name = "next_visit")]
     public DateTime NextVisit {get;set;} = DateTime.MinValue;
     
     [Field(Name = "page_type_id")]
-    public int PageTypeId {get;set;} = 0;
+    public long PageTypeId {get;set;} = 0;
 
     public PageType? PageType {get;set;} = null;
     [Field(Name = "last_http_status_code")]

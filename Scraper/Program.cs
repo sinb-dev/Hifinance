@@ -42,7 +42,7 @@ try
     };
     await Database.Instance.Insert(scraperTarget);
     Analyzer a = new();
-    a.Analyze(scraperTarget, html);    
+    await a.Analyze(scraperTarget, html);    
 
 } 
 catch (IOException e) 

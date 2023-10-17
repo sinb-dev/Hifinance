@@ -5,12 +5,12 @@ namespace Scraper;
 
 public class Analyzer
 {
-    public void Analyze(ScrapeTarget target, string html) 
+    public async Task Analyze(ScrapeTarget target, string html) 
     {
         HtmlDocument doc = new HtmlDocument();
         doc.LoadHtml(html);
 
-        List<TargetProperty> props = Database.Instance.SelectTargetPropertiesById(target.PageTypeId);
+        List<TargetProperty> props = await Database.Instance.SelectById<TargetProperty>(target.PageTypeId);
         foreach (TargetProperty p in props)
         {
             string property = p.Property;

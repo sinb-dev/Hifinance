@@ -4,7 +4,7 @@ namespace Scraper.Data.Models;
 public class PageType : Model
 {
     [Field(Name = "page_type_id", AutoIncrement = true)]
-    public int PageTypeId { get; set;} = 0;
+    public long PageTypeId { get; set;} = 0;
     [Field(Name = "name")]
     public string Name {get;set;} = string.Empty;
     [Field(Name = "website")]

@@ -25,7 +25,7 @@ public class Database
 
     Dictionary<Query, string> queries = new() {
         {Query.Insert, "INSERT INTO {0} ({1}) VALUES ({2})"},
-        {Query.SelectByField, "SELECT {0} FROM {1} WHERE {2} = {3}"},
+        {Query.SelectByField, "SELECT {0} FROM {1} WHERE {2} = '{3}'"},
     };
 
     public Database(string databaseFilename)
@@ -59,7 +59,7 @@ public class Database
             await command.ExecuteNonQueryAsync();
         }
     }
-    async Task<List<T>> query(string sql, Dictionary<string, object>? parameters = null) 
+    async Task<List<T>> query<T>(string sql, Dictionary<string, object>? parameters = null) where T : new()
     {
         List<T> result = new();
         using (SQLiteConnection conn = new SQLiteConnection("Data Source="+DATABASE_FILENAME))
@@ -71,10 +71,25 @@ public class Database
             {
                 foreach (var param in parameters) 
                 {
-                    command.Parameters.AddWithValue($"@{param.Key}", param.Value);
+                    //command.Parameters.AddWithValue($"@{param.Key}", param.Value);
                 }
             }
-            await command.ExecuteNonQueryAsync();
+            var reader = await command.ExecuteReaderAsync();
+            var props = typeof(T).GetProperties();
+            while (reader.Read()) {
+                T record = new();
+                for (int i = 0; i < reader.FieldCount; i++) {
+                    foreach (var p in props) 
+                    {
+                        object[] attribs = p.GetCustomAttributes(typeof(FieldAttribute), false);
+                        if (attribs.Length == 0) continue;
+                        if ((attribs[0] as FieldAttribute).Name == reader.GetName(i)) {
+                            p.SetValue(record, reader.GetValue(i));
+                        }
+                    }
+                }
+                result.Add(record);
+            }
         }
         return result;
     }
@@ -110,13 +125,16 @@ public class Database
         await execute(sql, paramValues);
     }
 
-    public List<TargetProperty> SelectTargetPropertiesById(int id) 
+    public async Task<List<T>> SelectById<T>(long id) where T : new()
     {
-        List<TargetProperty> result = new();
+        List<T> result = new();
         string fields = "*";
         string table = "target_properties";
         string key = "page_type_id";
         string sql = string.Format(queries[Query.SelectByField], fields, table, key, id);
+        result = await query<T>(sql, new Dictionary<string, object> {
+            {"@value", id}
+        });
 
         return result;
     }
