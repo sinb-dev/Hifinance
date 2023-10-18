@@ -1,5 +1,6 @@
 bin
 .vscode
+.vs
 cache
 obj
 scraper.db

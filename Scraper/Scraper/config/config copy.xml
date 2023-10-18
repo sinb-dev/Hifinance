@@ -1,0 +1,10 @@
+<Config>
+<Website Name="Proshop" BaseUrl="https://www.proshop.dk/">
+    <PageTypes>
+        <PageType Name="ProductDetails" IntervalHours="24" IdentifyBySelector="article.site-new-product-page-design" />
+    </PageTypes>
+    <Targets>
+        <Target LastVisit="">https://www.proshop.dk/Bundkort/ASUS-ROG-MAXIMUS-Z690-HERO-Bundkort-Intel-Z690-Intel-LGA1700-socket-DDR5-RAM-ATX/3000492</Target>
+    </Targets>
+</Website>
+</Config>
