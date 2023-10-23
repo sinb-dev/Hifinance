@@ -76,7 +76,15 @@ class ScraperCache
 
     string getFileNameFromUrl(Uri url) 
     {
-        string filename = url.Host + Path.DirectorySeparatorChar + url.LocalPath.Substring(1).Replace("/","--");
+        string filename = url.Host + Path.DirectorySeparatorChar;
+        if (url.LocalPath == "/") 
+        {
+            filename += "index.html";
+        }
+        else
+        {
+            filename += url.LocalPath.Substring(1).Replace("/","--");
+        }
         filename = filename.Replace("?","_");
         filename = filename.Replace(":","_");
         filename = filename.Replace("+","-");

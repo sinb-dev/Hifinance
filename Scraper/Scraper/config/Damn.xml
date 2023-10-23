@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Website Name="Google" BaseUrl="https://google.com" Created="2023-10-18T15:18:14.1171431+02:00">
-    <Target NextVisit="2023-10-18T15:18:14.134201+02:00" LastHttpStatusCode="-1">https://google.com</Target>
+  <Website Name="Google" BaseUrl="https://google.com" Created="2023-10-18T21:14:54.9001096+02:00">
+    <Target NextVisit="2023-10-18T21:14:54.9415312+02:00" LastHttpStatusCode="-1">https://google.com</Target>
   </Website>
-  <Website Name="DR" BaseUrl="https://dr.dk" Created="2023-10-18T15:18:14.1343185+02:00">
-    <Target NextVisit="2023-10-18T15:18:14.1343199+02:00" LastHttpStatusCode="-1">/dr.dk</Target>
-    <Target NextVisit="2023-10-18T15:18:14.1343203+02:00" LastHttpStatusCode="-1">/dr.dk/nyheder</Target>
+  <Website Name="DR" BaseUrl="https://www.dr.dk" Created="2023-10-18T21:14:54.9416101+02:00">
+    <Target NextVisit="2023-10-18T21:14:54.9416112+02:00" LastHttpStatusCode="-1">/dr.dk</Target>
+    <Target NextVisit="2023-10-18T21:14:54.9416116+02:00" LastHttpStatusCode="-1">/dr.dk/nyheder</Target>
   </Website>
 </Config>

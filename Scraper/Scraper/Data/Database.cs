@@ -17,6 +17,7 @@ static class Table {
     public static string TargetProperty = "target_properties"; 
     public static string TargetData = "target_data"; 
 }
+
 public class Database 
 {
     public static Database Instance;

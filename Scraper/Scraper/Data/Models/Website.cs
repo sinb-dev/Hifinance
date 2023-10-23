@@ -19,6 +19,10 @@ public class Website : Model
     public List<ScrapeTarget> Targets { get; set; } = new();
     public Uri GetUri(string uri)
     {
+        if (string.IsNullOrWhiteSpace(uri)) 
+        {
+            return new Uri($"{BaseUrl}");
+        }
         if (uri.Substring(0, 1) != "/")
             uri = "/" + uri;
         return new Uri($"{BaseUrl}{uri}");

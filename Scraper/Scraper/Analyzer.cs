@@ -10,7 +10,7 @@ public class Analyzer
         HtmlDocument doc = new HtmlDocument();
         doc.LoadHtml(html);
 
-        List<TargetProperty> props = await Database.Instance.SelectById<TargetProperty>(target.PageTypeId);
+        /*List<TargetProperty> props = await Database.Instance.SelectById<TargetProperty>(target.PageTypeId);
         foreach (TargetProperty p in props)
         {
             string property = p.Property;
@@ -20,6 +20,6 @@ public class Analyzer
             data.Result = value;
             data.Scraped = DateTime.Now;
             Database.Instance.Insert(data);
-        }
+        }*/
     }
 }

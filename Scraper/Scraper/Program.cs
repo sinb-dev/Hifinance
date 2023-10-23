@@ -25,24 +25,26 @@ try
     config.Websites.Add(new Website()
     {
         Name = "DR",
-        BaseUrl = "https://dr.dk",
+        BaseUrl = "https://www.dr.dk",
         Targets = new()
-                    {
-                        new ScrapeTarget
-                        {
-                            Url = "/dr.dk",
-                            NextVisit = DateTime.Now,
-                            LastHttpStatusCode = -1
-                        },
-                        new ScrapeTarget
-                        {
-                            Url = "/dr.dk/nyheder",
-                            NextVisit = DateTime.Now,
-                            LastHttpStatusCode = -1
-                        },
-                    }
+        {
+            new ScrapeTarget
+            {
+                
+                Url = "/dr.dk",
+                NextVisit = DateTime.Now,
+                LastHttpStatusCode = -1
+            },
+            new ScrapeTarget
+            {
+                Url = "/dr.dk/nyheder",
+                NextVisit = DateTime.Now,
+                LastHttpStatusCode = -1
+            },
+        }
     });
-    scraper.Start(config.Websites[1]);
+    scraper.SetCacheFolder("cache");
+    await scraper.Start(config.Websites[1]);
     /*Website web = config.Websites[];
     web.Targets.Add(new ScrapeTarget()
     {
@@ -52,8 +54,7 @@ try
     });*/
     Config.Save(config);
     Console.WriteLine(Config.Instance.Websites);
-    /*scraper.SetCacheFolder("cache");
-    Uri test = new Uri("https://www.proshop.dk/Bundkort/ASUS-ROG-MAXIMUS-Z690-HERO-Bundkort-Intel-Z690-Intel-LGA1700-socket-DDR5-RAM-ATX/3000492");
+    /*Uri test = new Uri("https://www.proshop.dk/Bundkort/ASUS-ROG-MAXIMUS-Z690-HERO-Bundkort-Intel-Z690-Intel-LGA1700-socket-DDR5-RAM-ATX/3000492");
     string html = await scraper.Scrape( test );
     
     File.Delete("scraper.db");
