@@ -14,6 +14,12 @@ public class Website : Model
     [Field(Name = "created")]
     [XmlAttribute]
     public DateTime Created { get; set; } = DateTime.Now;
+    [XmlAttribute]
+    public DateTime LastScrape { get; set; } = DateTime.MinValue;
+    public int Latency { get; set; }= 120;
+
+    [XmlIgnore]
+    public string Filename => $"{new Uri(BaseUrl).Host}.xml";
 
     [XmlElement("Target")]
     public List<ScrapeTarget> Targets { get; set; } = new();

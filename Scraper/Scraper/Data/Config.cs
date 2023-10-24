@@ -49,6 +49,38 @@ public class Config
         Instance = instance;
         return instance;
     }
+    public static Website? LoadWebsite(string filename)
+    {
+        string xml = File.ReadAllText(folder + Path.DirectorySeparatorChar + filename);
+        Website instance = LoadWebsiteXml(xml);
+        //Deny the instance if the filename does not match the baseUrl host name
+        if (instance != null) 
+        {
+            FileInfo info = new FileInfo(filename);
+            if (info.Name != instance.Filename) {
+                throw new InvalidDataException($"The file {info.Name} does not match the specified hostname {instance.BaseUrl}");
+            }
+            return instance;
+        }
+        return null;
+    }
+    public static Website? LoadWebsiteXml(string xml)
+    {
+        MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
+
+        XmlSerializer serializer = new XmlSerializer(typeof(Website));
+
+        XmlReader reader = XmlReader.Create(stream);
+
+
+        Website? instance = (Website?)serializer.Deserialize(reader);
+
+        return instance;
+    }
+
+
+
+
     public static void Save()
     {
         if (Instance == null) return;
@@ -75,6 +107,29 @@ public class Config
         catch (Exception e)
         {
             Console.WriteLine("Unable to save config.xml: " + e.Message);
+        }
+    }
+    public static void Save(Website website)
+    {
+        if (string.IsNullOrEmpty(website.Filename))
+        {
+            throw new FileNotFoundException("Missing website filename");
+        }
+        XmlWriterSettings settings = new XmlWriterSettings
+        {
+            Indent = true
+        };
+        try
+        {
+            using (XmlWriter writer = XmlWriter.Create(folder + Path.DirectorySeparatorChar + website.Filename, settings))
+            {
+                XmlSerializer ser = new XmlSerializer(typeof(Website));
+                ser.Serialize(writer, website);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"Unable to save {website.Filename}: " + e.Message);
         }
     }
 }

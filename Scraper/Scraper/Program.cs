@@ -6,8 +6,10 @@ Scraper.Scraper scraper = new();
 
 try
 {
-    Config config = new("Damn.xml");
-    config.Websites.Add(
+    //Config config = new("dr.dk.xml");
+    Website? website = Config.LoadWebsite("www.dr.dk.xml");
+    Console.WriteLine(website.Name);
+    /*config.Websites.Add(
         new Website()
         {
             Name = "Google",
@@ -42,9 +44,10 @@ try
                 LastHttpStatusCode = -1
             },
         }
-    });
+    });*/
     scraper.SetCacheFolder("cache");
-    await scraper.Start(config.Websites[1]);
+    //website.LastScrape = DateTime.Now - TimeSpan.FromSeconds(10);
+    await scraper.Start(website);
     /*Website web = config.Websites[];
     web.Targets.Add(new ScrapeTarget()
     {
@@ -52,7 +55,7 @@ try
         NextVisit = DateTime.Now,
         LastHttpStatusCode = -1
     });*/
-    Config.Save(config);
+    //Config.Save(config);
     Console.WriteLine(Config.Instance.Websites);
     /*Uri test = new Uri("https://www.proshop.dk/Bundkort/ASUS-ROG-MAXIMUS-Z690-HERO-Bundkort-Intel-Z690-Intel-LGA1700-socket-DDR5-RAM-ATX/3000492");
     string html = await scraper.Scrape( test );

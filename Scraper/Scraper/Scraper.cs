@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using Scraper.Data;
 using Scraper.Data.Models;
 namespace Scraper;
 public class Scraper
@@ -18,11 +19,33 @@ public class Scraper
     }
     public async Task Start(Website website)
     {
+        await NextPossibleScrape(website);
+        
         await loadRobots(website);
+        try 
+        {
+            string content = await Scrape(website.GetUri(string.Empty));
 
-        string content = await Scrape(website.GetUri(string.Empty));
+            website.LastScrape = DateTime.Now;
+            Config.Save(website);
+            
+            GetLinks(website, content);
+        }
+        catch(Exception)
+        {
 
-        GetLinks(website, content);
+        }
+    }
+
+    async Task NextPossibleScrape(Website website) 
+    {
+        int secsSinceLast = (int) (DateTime.Now - website.LastScrape).TotalSeconds;
+        if (secsSinceLast > 0 && secsSinceLast < website.Latency)
+        {
+            //Prevent scraping too much from same source
+            Console.WriteLine($"Latency: Scraping resumes in {website.Latency - secsSinceLast} seconds");
+            await Task.Delay ( (website.Latency - secsSinceLast) * 1000 );
+        }
     }
 
     async Task loadRobots(Website website)
