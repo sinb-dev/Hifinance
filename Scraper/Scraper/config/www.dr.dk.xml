@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Website xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DR" BaseUrl="https://www.dr.dk" Created="2023-10-18T21:14:54.9416101+02:00" LastScrape="2023-10-24T22:42:47.2650521+02:00">
+<Website xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DR" BaseUrl="https://www.dr.dk" Created="2023-10-18T21:14:54.9416101+02:00" LastScrape="2023-10-28T19:34:23.4007197+02:00">
   <Latency>120</Latency>
   <Target NextVisit="2023-10-18T21:14:54.9416112+02:00" LastHttpStatusCode="-1">/dr.dk</Target>
   <Target NextVisit="2023-10-18T21:14:54.9416116+02:00" LastHttpStatusCode="-1">/dr.dk/nyheder</Target>

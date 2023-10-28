@@ -19,7 +19,7 @@ public class Scraper
     }
     public async Task Start(Website website)
     {
-        await NextPossibleScrape(website);
+        await WaitForNextScrape(website);
         
         await loadRobots(website);
         try 
@@ -37,7 +37,7 @@ public class Scraper
         }
     }
 
-    async Task NextPossibleScrape(Website website) 
+    async Task WaitForNextScrape(Website website) 
     {
         int secsSinceLast = (int) (DateTime.Now - website.LastScrape).TotalSeconds;
         if (secsSinceLast > 0 && secsSinceLast < website.Latency)
@@ -83,9 +83,23 @@ public class Scraper
             {
                 if (attrib.Name == "href") 
                 {
-                    Uri uri = new Uri(attrib.Value);
+                    Uri uri;
+                    try {
+                        uri = new Uri(attrib.Value);
+                    } 
+                    catch (UriFormatException) 
+                    {
+                        if (attrib.Value.IndexOf(":") == -1) 
+                        {
+                            uri = new Uri($"/{attrib.Value}");
+                        }
+                        else
+                        {
+                            uri = new("");
+                        }
+                    }
 
-                    if (uri.Host != websiteUri.Host) 
+                    if (!string.IsNullOrEmpty(uri.Host) && uri.Host != websiteUri.Host) 
                         continue;
                     if (robots != null && !robots.Allow(uri)) 
                         continue;

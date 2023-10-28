@@ -1,3 +1,4 @@
+using System.IO.Enumeration;
 using Scraper.Data;
 using Scraper.Data.Models;
 namespace Scraper.Tests;
@@ -14,6 +15,10 @@ public class Config_SaveLoadTests
     <Target NextVisit=""2023-10-18T14:16:03.1364607+02:00"" LastHttpStatusCode=""-1"">/nyheder</Target>
   </Website>
 </Config>";
+const string xml2 = @"<?xml version=""1.0"" encoding=""utf-8""?>
+<Website xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" Name=""Example"" BaseUrl=""https://example.com"" Created=""2023-10-18T21:14:54.9416101+02:00"" LastScrape=""2023-10-24T22:42:47.2650521+02:00"">
+  <Latency>120</Latency>
+</Website>";
     void seed(Config config)
     {
         if (!Directory.Exists("config")) Directory.CreateDirectory("config");
@@ -58,6 +63,12 @@ public class Config_SaveLoadTests
                 }
             }
         );
+    }
+    void cleanup()
+    {
+        if (Directory.Exists("config"))
+            Directory.Delete("config");
+        
     }
     [Fact]
     public void SaveConfig_ShouldSave()
@@ -106,5 +117,29 @@ public class Config_SaveLoadTests
         Assert.Equal("DR", instance.Websites[1].Name);
         Assert.Equal("https://dr.dk", instance.Websites[1].BaseUrl);
         Assert.Equal(DateTime.Parse("2023-10-18T14:16:03.1364591+02:00"), instance.Websites[1].Created);
+    }
+
+    [Fact]
+    public void LoadConfigWebsite_ShouldSucceed()
+    {
+        seed(new Config());
+        string filename = Path.GetRandomFileName()+".xml";
+        File.WriteAllText(filename, xml2);
+
+        Website? website = Config.LoadWebsite(filename);
+        File.Delete(filename); //Clean up
+        
+        //Cannot load a website where filename and BaseUrl does not match
+        Assert.Null(website);
+        
+        filename = "example.com.xml";
+        File.WriteAllText(filename, xml2);
+        website = Config.LoadWebsite(filename);
+        //Filename matches XML, should therefore not be null
+        Assert.NotNull(website);
+        
+
+        
+        cleanup();
     }
 }
